@@ -11,7 +11,7 @@ export const metadata = {
   categories: ["calendar"],
   category: "calendar",
   logo: "icon.svg",
-  publisher: "Cal.diy",
+  publisher: "MeetSynq",
   slug: "apple-calendar",
   url: "https://cal.com/",
   email: "help@cal.com",
