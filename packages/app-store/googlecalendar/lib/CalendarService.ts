@@ -268,6 +268,9 @@ class GoogleCalendarService implements Calendar {
           await calendar.events.patch({
             calendarId: selectedCalendar,
             eventId: event.id || "",
+            // Required whenever the target event carries conferenceData: without it
+            // Google rejects the patch as 403 rateLimitExceeded.
+            conferenceDataVersion: 1,
             requestBody: {
               location: getLocation({
                 videoCallData: calEvent.videoCallData,
@@ -300,6 +303,10 @@ class GoogleCalendarService implements Calendar {
           // Update the same event but this time we know the hangout link
           calendarId: selectedCalendar,
           eventId: event.id || "",
+          // The event has conferenceData (that is why hangoutLink is set), so this
+          // patch must declare conferenceDataVersion or Google 403s it as
+          // rateLimitExceeded and the whole booking is marked failed.
+          conferenceDataVersion: 1,
           requestBody: {
             description: getRichDescription({
               ...calEvent,
@@ -421,6 +428,9 @@ class GoogleCalendarService implements Calendar {
           // Update the same event but this time we know the hangout link
           calendarId: selectedCalendar,
           eventId: evt.data.id || "",
+          // See createEvent: patching a conference-bearing event without this
+          // returns 403 rateLimitExceeded.
+          conferenceDataVersion: 1,
           requestBody: {
             description: getRichDescription({
               ...event,
