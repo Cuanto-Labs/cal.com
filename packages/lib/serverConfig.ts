@@ -4,9 +4,21 @@ import type SMTPConnection from "nodemailer/lib/smtp-connection";
 import { isENVDev } from "@calcom/lib/env";
 
 import { getAdditionalEmailHeaders } from "./getAdditionalEmailHeaders";
+import type { ResendTransport } from "./resendTransport";
+import { createResendTransport } from "./resendTransport";
 
-function detectTransport(): SendmailTransport.Options | SMTPConnection.Options | string {
+function detectTransport():
+  | SendmailTransport.Options
+  | SMTPConnection.Options
+  | ResendTransport
+  | string {
   if (process.env.RESEND_API_KEY) {
+    // Default to Resend's HTTP API. Set RESEND_USE_SMTP=1 to fall back to
+    // smtp.resend.com:465 if the API is ever the thing that's broken.
+    if (process.env.RESEND_USE_SMTP !== "1") {
+      return createResendTransport(process.env.RESEND_API_KEY);
+    }
+
     const transport = {
       host: "smtp.resend.com",
       secure: true,
