@@ -327,7 +327,7 @@ export const getPublicEvent = async (
 
     let orgDetails: Pick<Team, "logoUrl" | "name"> | undefined;
     if (org) {
-      orgDetails = await prisma.team.findFirstOrThrow({
+      orgDetails = await prisma.team.findFirst({
         where: {
           slug: org,
         },
@@ -335,7 +335,7 @@ export const getPublicEvent = async (
           logoUrl: true,
           name: true,
         },
-      });
+      }) ?? undefined;
     }
 
     return {
