@@ -1,44 +1,99 @@
-import { cookies, headers } from "next/headers";
-import { redirect } from "next/navigation";
-import Link from "next/link";
-
-import { checkOnboardingRedirect } from "@calcom/features/auth/lib/onboardingUtils";
 import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
-
+import { checkOnboardingRedirect } from "@calcom/features/auth/lib/onboardingUtils";
+import { APP_NAME, WEBAPP_URL } from "@calcom/lib/constants";
 import { buildLegacyRequest } from "@lib/buildLegacyCtx";
+import type { Metadata } from "next";
+import { cookies, headers } from "next/headers";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { Glyph, type GlyphName } from "~/marketing/Glyph";
+import { MarketingShell } from "~/marketing/MarketingShell";
+import styles from "~/marketing/marketing.module.css";
+import { OverlapHero } from "~/marketing/OverlapHero";
+import { tiers, whiteLabelMailto } from "~/marketing/pricing-data";
+import { LensMark } from "~/marketing/Wordmark";
 
-const features = [
+const title = `${APP_NAME} — Find the overlap`;
+const description =
+  "MeetSynq finds the window that works for both calendars and books it. Booking links, team round-robin, intake forms, and a white-label platform agencies deploy under their own brand.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  metadataBase: new URL(WEBAPP_URL),
+  openGraph: {
+    title,
+    description,
+    url: WEBAPP_URL,
+    siteName: APP_NAME,
+    images: [`${WEBAPP_URL}/og-image.png`],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [`${WEBAPP_URL}/og-image.png`],
+  },
+};
+
+const integrations = ["Google Calendar", "Outlook", "Apple Calendar", "Google Meet", "Zoom", "Stripe"];
+
+const features: { glyph: GlyphName; title: string; desc: string }[] = [
   {
-    icon: "⚡",
-    title: "Instant booking links",
-    desc: "Share your link, let people book in seconds. No back-and-forth emails.",
+    glyph: "link",
+    title: "One link per meeting type",
+    desc: "Guests pick from what's open on both sides. The invite lands on both calendars with the video link attached.",
   },
   {
-    icon: "🗓️",
-    title: "Calendar sync",
-    desc: "Connects to Google, Outlook, and Apple Calendar. Never get double-booked.",
+    glyph: "calendar",
+    title: "Calendar sync that blocks everything",
+    desc: "Google, Outlook, and Apple Calendar. Busy time on any of them closes the slot everywhere.",
   },
   {
-    icon: "🏢",
-    title: "Team scheduling",
-    desc: "Round-robin, collective, or fixed hosts. Built for teams of any size.",
+    glyph: "rotate",
+    title: "Round-robin and collective",
+    desc: "Send the booking to whoever is next, or require the whole group. You set the rule once.",
   },
   {
-    icon: "🌍",
-    title: "Timezone aware",
-    desc: "Every booking auto-converts to the guest's timezone. Zero confusion.",
+    glyph: "globe",
+    title: "Every time zone, one clock",
+    desc: "Guests see your hours in their time. No arithmetic, no “is that your 9 or mine?”",
   },
   {
-    icon: "🔗",
-    title: "Workflow automation",
-    desc: "Send reminders, follow-ups, and confirmations automatically.",
+    glyph: "form",
+    title: "Ask before the call",
+    desc: "Phone, context, budget, anything you need. Answers ride along inside the invite.",
   },
   {
-    icon: "🎨",
-    title: "White-label ready",
-    desc: "Your brand, your domain. MeetSynq disappears into the background.",
+    glyph: "brand",
+    title: "Your brand, top to bottom",
+    desc: "Logo, colors, sender name, and domain. For agencies, MeetSynq disappears entirely.",
   },
 ];
+
+const steps = [
+  {
+    title: "Connect your calendar",
+    desc: "Google, Outlook, or Apple. One click, and MeetSynq starts reading when you're busy.",
+  },
+  {
+    title: "Set your hours",
+    desc: "Working hours, buffers between meetings, and how far ahead people can book.",
+  },
+  {
+    title: "Share your link",
+    desc: "Guests choose from the overlap. Invite, video link, and reminders go out on their own.",
+  },
+];
+
+const brands = [
+  { name: "Northwind Legal", initial: "N", color: "#1F3A5F", meeting: "Consultation · 45 min" },
+  { name: "Sol Studio", initial: "S", color: "#D9A400", meeting: "Discovery call · 30 min" },
+  { name: "Harbor Health", initial: "H", color: "#1E8E6E", meeting: "Intake visit · 20 min" },
+];
+
+const slots = ["10:00", "10:30", "11:00"];
 
 const LandingPage = async () => {
   const session = await getServerSession({ req: buildLegacyRequest(await headers(), await cookies()) });
@@ -56,171 +111,243 @@ const LandingPage = async () => {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 antialiased">
-      {/* Nav */}
-      <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-xl font-bold tracking-tight text-gray-900">
-            MeetSynq
-          </Link>
-          <nav className="hidden items-center gap-8 text-sm font-medium text-gray-600 md:flex">
-            <Link href="#features" className="hover:text-gray-900 transition-colors">Features</Link>
-            <Link href="#how-it-works" className="hover:text-gray-900 transition-colors">How it works</Link>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/auth/login"
-              className="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">
-              Sign in
-            </Link>
-            <Link
-              href="/auth/login"
-              className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 transition-colors">
+    <MarketingShell active="product">
+      {/* Hero */}
+      <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-14 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-28 lg:pt-20">
+        <div>
+          <p className={`${styles.mono} text-[11px] uppercase tracking-[0.16em] text-(--ms-slate)`}>
+            Scheduling · Teams · White-label
+          </p>
+          <h1
+            className={`${styles.display} mt-5 text-[3.25rem] font-bold leading-[0.95] text-(--ms-ink) sm:text-[4.25rem] lg:text-[5rem]`}>
+            Find the
+            <br />
+            overlap.
+          </h1>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-(--ms-slate)">
+            Two calendars, one shared window. MeetSynq finds it, books it, and puts the invite on both sides.
+            On your domain, in your brand.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Link href="/signup" className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}>
               Get started free
             </Link>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section className="relative overflow-hidden px-6 pb-24 pt-20 text-center">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-white to-white" />
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700">
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-            Scheduling that just works
-          </div>
-          <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight text-gray-900 md:text-6xl">
-            Meet smarter.<br />
-            <span className="text-blue-600">Book faster.</span>
-          </h1>
-          <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-gray-500">
-            MeetSynq is the open scheduling platform that replaces Calendly.
-            Share a link, sync your calendar, and let people book time with you — automatically.
-          </p>
-          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link
-              href="/auth/login"
-              className="rounded-xl bg-gray-900 px-7 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-gray-700 transition-all hover:shadow-xl">
-              Start for free →
-            </Link>
-            <Link
-              href="/auth/login"
-              className="rounded-xl border border-gray-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition-all">
-              Sign in to your account
+            <Link href="#how" className={`${styles.btn} ${styles.btnSecondary} ${styles.btnLarge}`}>
+              See how it works
             </Link>
           </div>
-          <p className="mt-4 text-sm text-gray-400">No credit card required · Free forever plan</p>
+          <p className="mt-4 text-sm text-(--ms-slate)">Free trial. No card needed.</p>
         </div>
+        <div className="lg:pl-6">
+          <OverlapHero />
+        </div>
+      </section>
 
-        {/* Mock booking UI */}
-        <div className="mx-auto mt-16 max-w-md overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl shadow-gray-200/60 text-left">
-          <div className="border-b border-gray-100 bg-gray-50 px-6 py-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm">MS</div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900">30 Min Meeting</p>
-                <p className="text-xs text-gray-500">meetsynq.com/alex/30min</p>
-              </div>
-            </div>
-          </div>
-          <div className="px-6 py-5">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-gray-400">Select a date</p>
-            <div className="grid grid-cols-7 gap-1 text-center text-xs">
-              {["M","T","W","T","F","S","S"].map((d, i) => (
-                <div key={i} className="py-1 font-medium text-gray-400">{d}</div>
-              ))}
-              {[null,null,"17","18","19","20","21"].map((d, i) => (
-                <div key={i} className={`rounded-lg py-2 font-medium ${d === "18" ? "bg-blue-600 text-white" : d ? "cursor-pointer text-gray-700 hover:bg-blue-50" : ""}`}>{d}</div>
-              ))}
-              {["22","23","24","25","26","27","28"].map((d, i) => (
-                <div key={i} className="cursor-pointer rounded-lg py-2 font-medium text-gray-700 hover:bg-blue-50">{d}</div>
-              ))}
-            </div>
-            <div className="mt-4 flex gap-2">
-              {["9:00am","9:30am","10:00am"].map((t) => (
-                <div key={t} className={`flex-1 rounded-lg border py-2 text-center text-xs font-medium ${t === "9:30am" ? "border-blue-500 bg-blue-50 text-blue-700" : "border-gray-200 text-gray-600"}`}>{t}</div>
-              ))}
-            </div>
-          </div>
+      {/* Integrations */}
+      <section className="border-y border-(--ms-line)">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-5 sm:px-8">
+          <span className={`${styles.mono} text-[11px] uppercase tracking-[0.14em] text-(--ms-slate)`}>
+            Works with
+          </span>
+          {integrations.map((name) => (
+            <span key={name} className="text-sm font-medium text-(--ms-ink)">
+              {name}
+            </span>
+          ))}
         </div>
       </section>
 
       {/* Features */}
-      <section id="features" className="bg-gray-50 px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-14 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
-              Everything you need to schedule
-            </h2>
-            <p className="mt-4 text-lg text-gray-500">Built for individuals and teams who value their time.</p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <div key={f.title} className="rounded-2xl border border-gray-200 bg-white p-6 hover:border-blue-200 hover:shadow-md transition-all">
-                <div className="mb-4 text-3xl">{f.icon}</div>
-                <h3 className="mb-2 text-base font-semibold text-gray-900">{f.title}</h3>
-                <p className="text-sm leading-relaxed text-gray-500">{f.desc}</p>
+      <section id="product" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20 sm:px-8 lg:py-28">
+        <div className="max-w-2xl">
+          <p className={`${styles.mono} text-[11px] uppercase tracking-[0.16em] text-(--ms-slate)`}>
+            What you get
+          </p>
+          <h2
+            className={`${styles.display} mt-4 text-4xl font-bold leading-[1.02] text-(--ms-ink) sm:text-5xl`}>
+            Everything between “let's meet” and the meeting.
+          </h2>
+        </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((f) => (
+            <div key={f.title} className={`${styles.tile} p-6`}>
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-(--ms-ink) shadow-sm">
+                <Glyph name={f.glyph} />
               </div>
-            ))}
-          </div>
+              <h3 className={`${styles.display} mt-5 text-xl font-semibold leading-tight text-(--ms-ink)`}>
+                {f.title}
+              </h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-(--ms-slate)">{f.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="px-6 py-24">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-14 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">Up in 2 minutes</h2>
-            <p className="mt-4 text-lg text-gray-500">No complex setup. No waiting for approval.</p>
-          </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              { step: "1", title: "Create your account", desc: "Sign up free. Connect your calendar in one click." },
-              { step: "2", title: "Set your availability", desc: "Tell us when you're free. We handle the rest." },
-              { step: "3", title: "Share your link", desc: "Send your booking link. People pick a time. Done." },
-            ].map((s) => (
-              <div key={s.step} className="text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">
-                  {s.step}
-                </div>
-                <h3 className="mb-2 font-semibold text-gray-900">{s.title}</h3>
-                <p className="text-sm leading-relaxed text-gray-500">{s.desc}</p>
-              </div>
-            ))}
+      <section id="how" className="scroll-mt-20 bg-(--ms-fog)">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+            <div>
+              <p className={`${styles.mono} text-[11px] uppercase tracking-[0.16em] text-(--ms-slate)`}>
+                How it works
+              </p>
+              <h2
+                className={`${styles.display} mt-4 text-4xl font-bold leading-[1.02] text-(--ms-ink) sm:text-5xl`}>
+                Live in a few minutes.
+              </h2>
+              <p className="mt-5 max-w-sm text-[17px] leading-relaxed text-(--ms-slate)">
+                Three things to do once. After that, the link does the work and the calendar stays right.
+              </p>
+            </div>
+            <ol className="relative space-y-8 border-l border-(--ms-line) pl-8">
+              {steps.map((s, i) => (
+                <li key={s.title} className="relative">
+                  <span
+                    className={`${styles.mono} absolute -left-8 top-0.5 flex h-6 w-6 -translate-x-1/2 items-center justify-center rounded-full bg-(--ms-ink) text-[11px] font-medium text-white`}>
+                    {i + 1}
+                  </span>
+                  <h3 className={`${styles.display} text-2xl font-semibold leading-tight text-(--ms-ink)`}>
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 max-w-md text-[15px] leading-relaxed text-(--ms-slate)">{s.desc}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-gray-900 px-6 py-20 text-center text-white">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
-            Ready to stop playing email tag?
-          </h2>
-          <p className="mb-8 text-lg text-gray-400">
-            Join thousands of people who use MeetSynq to book smarter.
-          </p>
-          <Link
-            href="/auth/login"
-            className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-semibold text-gray-900 hover:bg-gray-100 transition-colors">
-            Get started free →
+      {/* Agencies */}
+      <section className="bg-(--ms-ink) text-white">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+          <div className="grid items-end gap-10 lg:grid-cols-[1fr_1fr]">
+            <div>
+              <p className={`${styles.mono} text-[11px] uppercase tracking-[0.16em] text-white/55`}>
+                For agencies
+              </p>
+              <h2 className={`${styles.display} mt-4 text-4xl font-bold leading-[1.02] sm:text-5xl`}>
+                Your brand on the front.
+                <br />
+                Ours nowhere.
+              </h2>
+              <p className="mt-5 max-w-md text-[17px] leading-relaxed text-white/70">
+                Deploy MeetSynq on a domain you control for each client, with their logo, colors, and sender
+                name. The product never says MeetSynq unless you want it to.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/white-label" className={`${styles.btn} ${styles.btnOnDark} ${styles.btnLarge}`}>
+                  See white-label
+                </Link>
+                <a
+                  href={whiteLabelMailto}
+                  className={`${styles.btn} ${styles.btnGhostDark} ${styles.btnLarge}`}>
+                  Talk to us
+                </a>
+              </div>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 lg:gap-3" aria-hidden="true">
+              {brands.map((b, i) => (
+                <div
+                  key={b.name}
+                  className={`rounded-2xl bg-white p-4 text-(--ms-ink) shadow-xl ${
+                    i === 1 ? "lg:ml-12" : i === 2 ? "lg:ml-24" : ""
+                  }`}>
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold text-white"
+                      style={{ background: b.color }}>
+                      {b.initial}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold">{b.name}</p>
+                      <p className={`${styles.mono} text-[11px] text-(--ms-slate)`}>{b.meeting}</p>
+                    </div>
+                  </div>
+                  <div className="mt-3 grid grid-cols-3 gap-1.5">
+                    {slots.map((t, j) => (
+                      <span
+                        key={t}
+                        className={`${styles.mono} rounded-md border py-1.5 text-center text-[11px]`}
+                        style={
+                          j === 1
+                            ? { background: b.color, borderColor: b.color, color: "#fff" }
+                            : { borderColor: "#e6e8e8", color: "#5b6068" }
+                        }>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing teaser */}
+      <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className={`${styles.mono} text-[11px] uppercase tracking-[0.16em] text-(--ms-slate)`}>
+              Pricing
+            </p>
+            <h2
+              className={`${styles.display} mt-4 text-4xl font-bold leading-[1.02] text-(--ms-ink) sm:text-5xl`}>
+              Pay per seat. Nothing hidden.
+            </h2>
+          </div>
+          <Link href="/pricing" className={`${styles.btn} ${styles.btnSecondary}`}>
+            Full pricing
           </Link>
         </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {tiers.map((t) => (
+            <div
+              key={t.name}
+              className={`rounded-2xl border p-6 ${
+                t.highlighted ? "border-(--ms-ink) bg-(--ms-ink) text-white" : "border-(--ms-line) bg-white"
+              }`}>
+              <p
+                className={`${styles.mono} text-[11px] uppercase tracking-[0.14em] ${t.highlighted ? "text-white/60" : "text-(--ms-slate)"}`}>
+                {t.name}
+              </p>
+              <p className="mt-3 flex items-baseline gap-2">
+                <span className={`${styles.display} text-4xl font-bold leading-none`}>{t.price}</span>
+                <span className={`text-sm ${t.highlighted ? "text-white/60" : "text-(--ms-slate)"}`}>
+                  {t.unit}
+                </span>
+              </p>
+              <p
+                className={`mt-4 text-[15px] leading-relaxed ${t.highlighted ? "text-white/75" : "text-(--ms-slate)"}`}>
+                {t.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-gray-100 bg-white px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-gray-400 md:flex-row">
-          <p className="font-semibold text-gray-900">MeetSynq</p>
-          <p>© {new Date().getFullYear()} MeetSynq. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="/auth/login" className="hover:text-gray-700 transition-colors">Sign in</Link>
-            <Link href="/auth/login" className="hover:text-gray-700 transition-colors">Sign up</Link>
+      {/* Final CTA */}
+      <section className="bg-(--ms-fog)">
+        <div className="mx-auto flex max-w-6xl flex-col items-center px-5 py-20 text-center sm:px-8 lg:py-28">
+          <LensMark size={56} />
+          <h2
+            className={`${styles.display} mt-6 text-4xl font-bold leading-[1.02] text-(--ms-ink) sm:text-6xl`}>
+            Find your overlap.
+          </h2>
+          <p className="mt-4 max-w-md text-[17px] leading-relaxed text-(--ms-slate)">
+            Connect a calendar, share a link, and stop trading emails about times.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link href="/signup" className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}>
+              Get started free
+            </Link>
+            <Link href="/auth/login" className={`${styles.btn} ${styles.btnSecondary} ${styles.btnLarge}`}>
+              Sign in
+            </Link>
           </div>
         </div>
-      </footer>
-    </div>
+      </section>
+    </MarketingShell>
   );
 };
 
