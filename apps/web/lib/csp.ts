@@ -25,10 +25,10 @@ function getCspPolicy(nonce: string) {
     };
     object-src 'none';
     base-uri 'none';
-	  child-src app.cal.com;
+	  child-src ${WEBAPP_URL};
 	  style-src 'self' ${
       IS_PRODUCTION ? (useNonStrictPolicy ? "'unsafe-inline'" : "") : "'unsafe-inline'"
-    } app.cal.com;
+    } ${WEBAPP_URL};
 	  font-src 'self';
 	  img-src 'self' ${WEBAPP_URL} https://img.youtube.com https://eu.ui-avatars.com/api/ data:;
     connect-src 'self'

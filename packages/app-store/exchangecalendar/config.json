@@ -6,11 +6,11 @@
   "dirName": "exchangecalendar",
   "type": "exchange_calendar",
   "logo": "icon.svg",
-  "url": "https://cal.com",
+  "url": "https://meet.cuantolabs.com/",
   "variant": "calendar",
   "categories": ["calendar"],
   "publisher": "MeetSynq",
-  "email": "help@cal.com",
+  "email": "support@cuantolabs.com",
   "description": "Fetch Microsoft Exchange calendars and availabilities using Exchange Web Services (EWS).",
   "__createdUsingCli": true,
   "isOAuth": false

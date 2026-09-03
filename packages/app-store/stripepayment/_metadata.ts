@@ -17,11 +17,11 @@ export const metadata = {
   publisher: "MeetSynq",
   title: "Stripe",
   type: "stripe_payment",
-  url: "https://cal.com/",
+  url: "https://meet.cuantolabs.com/",
   docsUrl: "https://stripe.com/docs",
   variant: "payment",
   extendsFeature: "EventType",
-  email: "help@cal.com",
+  email: "support@cuantolabs.com",
   dirName: "stripepayment",
   isOAuth: true,
 } as AppMeta;

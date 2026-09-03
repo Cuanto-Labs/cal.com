@@ -11,7 +11,7 @@
   ],
   "publisher": "Eric Luce",
   "email": "info@restlessmindstech.com",
-  "description": "Quickly share your [MeetSynq](https://cal.com) meeting links with Raycast",
+  "description": "Quickly share your MeetSynq meeting links with Raycast",
   "__createdUsingCli": true,
   "isOAuth": false,
   "externalLink": {

@@ -8,3 +8,5 @@ Disallow: /settings/my-account
 Allow: /api/social/og/image
 # Specifically allow access to api/app-store to allow search engines to fetch assets
 Allow: /api/app-store/
+
+Sitemap: https://meet.cuantolabs.com/sitemap.xml

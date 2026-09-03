@@ -4,11 +4,11 @@
   "slug": "signal",
   "type": "signal_video",
   "logo": "icon.svg",
-  "url": "https://cal.com/",
+  "url": "https://meet.cuantolabs.com/",
   "variant": "messaging",
   "categories": ["messaging","conferencing"],
   "publisher": "MeetSynq",
-  "email": "support@cal.com",
+  "email": "support@cuantolabs.com",
   "description": "Schedule a chat with your guests or have a Signal Video call.",
   "__createdUsingCli": true,
   "appData": {

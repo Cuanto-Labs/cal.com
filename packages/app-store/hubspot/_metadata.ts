@@ -16,7 +16,7 @@ export const metadata = {
   slug: "hubspot",
   extendsFeature: "EventType",
   title: "HubSpot CRM",
-  email: "help@cal.com",
+  email: "support@cuantolabs.com",
   dirName: "hubspot",
   isOAuth: true,
 } as AppMeta;

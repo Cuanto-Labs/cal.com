@@ -3,11 +3,11 @@
   "slug": "umami",
   "type": "umami_analytics",
   "logo": "icon.svg",
-  "url": "https://cal.com/",
+  "url": "https://meet.cuantolabs.com/",
   "variant": "analytics",
   "categories": ["analytics"],
   "publisher": "MeetSynq",
-  "email": "help@cal.com",
+  "email": "support@cuantolabs.com",
   "description": "Umami makes it easy to collect, analyze, and understand your web data — while maintaining visitor privacy and data ownership.",
   "extendsFeature": "EventType",
   "appData": {

@@ -1,15 +1,13 @@
-import type { NextApiRequest } from "next";
-
 import { WEBAPP_URL } from "@calcom/lib/constants";
 import prisma from "@calcom/prisma";
-
+import type { NextApiRequest } from "next";
 import type {
-  NewCanvas,
+  InputComponent,
   ListComponent,
   ListItem,
+  NewCanvas,
   SpacerComponent,
   TextComponent,
-  InputComponent,
 } from "../../lib";
 import { isValidCalURL } from "../../lib/isValidCalURL";
 
@@ -25,7 +23,7 @@ export async function handleLinkStep(req: NextApiRequest): Promise<NewCanvas | s
     type: "input",
     id: "submit_booking_url",
     label: "Enter your MeetSynq link",
-    placeholder: "https://cal.com/valentinchmara/30min",
+    placeholder: "https://meet.cuantolabs.com/username/30min",
     save_state: "unsaved",
     action: {
       type: "submit",

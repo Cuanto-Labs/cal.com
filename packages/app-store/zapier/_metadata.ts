@@ -14,7 +14,7 @@ export const metadata = {
   type: "zapier_automation",
   url: "https://zapier.com/apps/calcom/integrations",
   variant: "automation",
-  email: "help@cal.com",
+  email: "support@cuantolabs.com",
   dirName: "zapier",
   isOAuth: false,
 } as AppMeta;

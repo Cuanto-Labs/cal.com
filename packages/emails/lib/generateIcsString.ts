@@ -84,7 +84,7 @@ const generateIcsString = ({
     organizer: {
       name: event.organizer.name,
       ...(event.hideOrganizerEmail && !isOrganizerExempt
-        ? { email: "no-reply@cal.com" }
+        ? { email: "no-reply@cuantolabs.com" }
         : { email: event.organizer.email }),
     },
     ...{ recurrenceRule },

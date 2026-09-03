@@ -21,7 +21,7 @@ export const metadata = {
   slug: "msteams",
   dirName: "office365video",
   url: "https://www.microsoft.com/en-ca/microsoft-teams/group-chat-software",
-  email: "help@cal.com",
+  email: "support@cuantolabs.com",
   isOAuth: true,
 } as AppMeta;
 

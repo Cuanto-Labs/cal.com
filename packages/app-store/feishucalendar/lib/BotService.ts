@@ -1,5 +1,4 @@
 import logger from "@calcom/lib/logger";
-
 import { FEISHU_HOST } from "../common";
 import { getAppAccessToken } from "./AppAccessToken";
 
@@ -12,13 +11,13 @@ const msg = {
       [
         {
           tag: "text",
-          text: "MeetSynq is an open source scheduling infrastructure.",
+          text: "MeetSynq is a scheduling infrastructure for everyone.",
         },
       ],
       [
         {
           tag: "text",
-          text: 'It allows users to send a unique "cal.com" URL that allows anyone to create bookings on their calendars',
+          text: "It allows users to send a unique MeetSynq URL that allows anyone to create bookings on their calendars",
         },
       ],
       [
@@ -36,7 +35,7 @@ const msg = {
       [
         {
           tag: "text",
-          text: "1. Visit https://cal.com and sign up for an account.",
+          text: "1. Visit https://meet.cuantolabs.com and sign up for an account.",
         },
       ],
       [

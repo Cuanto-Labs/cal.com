@@ -1,6 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-
 import { WEBAPP_URL } from "@calcom/lib/constants";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
@@ -20,15 +19,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         const parsedUrl = new URL(url);
         const hostname = parsedUrl.hostname.toLowerCase();
-        
-        if (hostname === "cal.com" || hostname.endsWith(".cal.com")) {
+        const webappHostname = new URL(WEBAPP_URL).hostname.toLowerCase();
+
+        if (hostname === webappHostname || hostname.endsWith(`.${webappHostname}`)) {
           origin = parsedUrl.origin;
           calLink = parsedUrl.pathname + parsedUrl.search;
           if (calLink.startsWith("/")) {
             calLink = calLink.substring(1);
           }
         } else {
-          return res.status(400).json({ message: "URL must be for cal.com or a subdomain of cal.com" });
+          return res.status(400).json({ message: `URL must be for ${webappHostname} or a subdomain of it` });
         }
       } catch {
         return res.status(400).json({ message: "Invalid URL format" });
@@ -78,7 +78,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                   }
                   p(cal, ar);
                 };
-            })(window, "https://app.cal.com/embed/embed.js", "init");
+            })(window, "${WEBAPP_URL}/embed/embed.js", "init");
 
             Cal("init", { origin: "${origin}" });
 

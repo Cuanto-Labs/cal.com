@@ -4,13 +4,13 @@
   "slug": "baa-for-hipaa",
   "type": "baa-for-hipaa_other",
   "logo": "icon.svg",
-  "url": "https://cal.com/BAA",
+  "url": "https://meet.cuantolabs.com/BAA",
   "variant": "other",
   "categories": [
     "other"
   ],
   "publisher": "MeetSynq",
-  "email": "support@cal.com",
+  "email": "support@cuantolabs.com",
   "description": "Request a signed Business Associate Agreement for your HIPAA compliance records",
   "isTemplate": false,
   "__createdUsingCli": true,
@@ -20,7 +20,7 @@
     "mode": "subscription"
   },
   "externalLink": {
-    "url": "https://cal.com/BAA",
+    "url": "https://meet.cuantolabs.com/BAA",
     "newTab": true
   }
 }

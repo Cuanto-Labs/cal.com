@@ -3,11 +3,11 @@
   "slug": "matomo",
   "type": "matomo_analytics",
   "logo": "icon.svg",
-  "url": "https://cal.com/",
+  "url": "https://meet.cuantolabs.com/",
   "variant": "analytics",
   "categories": ["analytics"],
   "publisher": "MeetSynq",
-  "email": "help@cal.com",
+  "email": "support@cuantolabs.com",
   "description": "Google Analytics alternative that protects your data and your customers' privacy",
   "extendsFeature": "EventType",
   "appData": {

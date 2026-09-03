@@ -1,10 +1,8 @@
-import type { TFunction } from "i18next";
-
 import { AppStoreLocationType } from "@calcom/app-store/locations";
 import ServerTrans from "@calcom/lib/components/ServerTrans";
 import { WEBAPP_URL } from "@calcom/lib/constants";
 import type { CalendarEvent, Person } from "@calcom/types/Calendar";
-
+import type { TFunction } from "i18next";
 import { BaseScheduledEmail } from "./BaseScheduledEmail";
 
 // https://stackoverflow.com/questions/56263980/get-key-of-an-enum-from-its-value-in-typescript
@@ -72,7 +70,7 @@ export const BrokenIntegrationEmail = (
   if (type === "video") {
     let location = calEvent.location ? getEnumKeyByEnumValue(AppStoreLocationType, calEvent.location) : " ";
     if (location === "Daily") {
-      location = "Cal Video";
+      location = "MeetSynq Video";
     }
     if (location === "GoogleMeet") {
       location = `${location.slice(0, 5)} ${location.slice(5)}`;

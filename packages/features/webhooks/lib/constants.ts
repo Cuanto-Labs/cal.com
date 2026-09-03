@@ -32,7 +32,7 @@ export const getWebhookVersionLabel = (version: WebhookVersion): string =>
  * Links to the specific version's payload documentation.
  */
 export const WEBHOOK_VERSION_DOCS: Record<WebhookVersion, string> = {
-  [WebhookVersion.V_2021_10_20]: "https://cal.com/docs/developing/guides/automation/webhooks#2021-10-20",
+  [WebhookVersion.V_2021_10_20]: "https://cuantolabs.com#2021-10-20",
   // Add new versions here: [WebhookVersion.V_YYYY_MM_DD]: "https://cal.com/docs/webhooks/v-yyyy-mm-dd",
 };
 
@@ -40,7 +40,7 @@ export const WEBHOOK_VERSION_DOCS: Record<WebhookVersion, string> = {
  * Get documentation URL for a specific webhook version
  */
 export const getWebhookVersionDocsUrl = (version: WebhookVersion): string =>
-  WEBHOOK_VERSION_DOCS[version] ?? "https://cal.com/docs/developing/guides/automation/webhooks";
+  WEBHOOK_VERSION_DOCS[version] ?? "https://cuantolabs.com";
 
 export const WEBHOOK_TRIGGER_EVENTS_GROUPED_BY_APP = {
   core: [

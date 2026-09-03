@@ -3,7 +3,7 @@ import type { AppMeta } from "@calcom/types/App";
 export const metadata = {
   name: "Jitsi Video",
   description:
-    "Jitsi is a free open-source video conferencing software for web and mobile. Make a call, launch on your own servers, integrate into your app, and more.",
+    "Jitsi is a free video conferencing software for web and mobile. Make a call, launch on your own servers, integrate into your app, and more.",
   installed: true,
   type: "jitsi_video",
   variant: "conferencing",
@@ -14,7 +14,7 @@ export const metadata = {
   slug: "jitsi",
   title: "Jitsi Meet",
   isGlobal: false,
-  email: "help@cal.com",
+  email: "support@cuantolabs.com",
   appData: {
     location: {
       linkType: "dynamic",

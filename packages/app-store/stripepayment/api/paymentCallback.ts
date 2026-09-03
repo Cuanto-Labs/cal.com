@@ -1,6 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import z from "zod";
-
 import { getCustomerAndCheckoutSession } from "@calcom/app-store/stripepayment/lib/getCustomerAndCheckoutSession";
 import sendVerificationRequest from "@calcom/features/auth/lib/sendVerificationRequest";
 import { WEBAPP_URL } from "@calcom/lib/constants";
@@ -8,9 +5,11 @@ import { HttpError } from "@calcom/lib/http-error";
 import logger from "@calcom/lib/logger";
 import { defaultHandler } from "@calcom/lib/server/defaultHandler";
 import { defaultResponder } from "@calcom/lib/server/defaultResponder";
-import { VerificationTokenService } from "../lib/VerificationTokenService";
 import { prisma } from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";
+import type { NextApiRequest, NextApiResponse } from "next";
+import z from "zod";
+import { VerificationTokenService } from "../lib/VerificationTokenService";
 
 const querySchema = z.object({
   callbackUrl: z.string().transform((url) => {
@@ -33,7 +32,7 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
     throw new HttpError({
       statusCode: 404,
       message:
-        "Stripe customer not found or deleted.  Please contact support@cal.com and mention your premium username",
+        "Stripe customer not found or deleted.  Please contact support@cuantolabs.com and mention your premium username",
       url: req.url,
       method: req.method,
     });
@@ -111,7 +110,7 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
         url: req.url,
         method: req.method,
         message:
-          "We have received your payment. Your premium username could still not be reserved. Please contact support@cal.com and mention your premium username",
+          "We have received your payment. Your premium username could still not be reserved. Please contact support@cuantolabs.com and mention your premium username",
       });
     }
   }

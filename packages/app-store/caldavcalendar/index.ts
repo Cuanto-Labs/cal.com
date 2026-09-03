@@ -13,8 +13,8 @@ export const metadata = {
   logo: "icon.svg",
   publisher: "MeetSynq",
   slug: "caldav-calendar",
-  url: "https://cal.com/",
-  email: "help@cal.com",
+  url: "https://meet.cuantolabs.com/",
+  email: "support@cuantolabs.com",
   dirName: "caldavcalendar",
 } as App;
 

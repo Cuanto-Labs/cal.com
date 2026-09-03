@@ -13,8 +13,8 @@ export const metadata = {
   publisher: "MeetSynq",
   slug: "office365-calendar",
   dirName: "office365calendar",
-  url: "https://cal.com/",
-  email: "help@cal.com",
+  url: "https://meet.cuantolabs.com/",
+  email: "support@cuantolabs.com",
   isOAuth: true,
 } as AppMeta;
 

@@ -90,7 +90,7 @@ export default function RecurringEventController({
                 <LearnMoreLink
                   t={t}
                   i18nKey="recurring_event_description"
-                  href="https://cal.com/help/event-types/recurring-events"
+                  href="https://cuantolabs.com"
                 />
               }
               checked={!!recurringEventState}

@@ -8,7 +8,7 @@
   "categories": ["payment"],
   "publisher": "BTCPay Server Team",
   "email": "chat.btcpayserver.org",
-  "description": "BTCPay Server is a self-hosted open source Bitcoin payment processor. Start receiving bitcoin payments for your events and bookings.",
+  "description": "BTCPay Server is a self-hosted Bitcoin payment processor. Start receiving bitcoin payments for your events and bookings.",
   "extendsFeature": "EventType",
   "isTemplate": false,
   "__createdUsingCli": true,

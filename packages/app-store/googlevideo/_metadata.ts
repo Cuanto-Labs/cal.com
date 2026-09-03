@@ -15,9 +15,9 @@ export const metadata = {
   variant: "conferencing",
   logo: "logo.webp",
   publisher: "MeetSynq",
-  url: "https://cal.com/",
+  url: "https://meet.cuantolabs.com/",
   isGlobal: false,
-  email: "help@cal.com",
+  email: "support@cuantolabs.com",
   appData: {
     location: {
       linkType: "dynamic",

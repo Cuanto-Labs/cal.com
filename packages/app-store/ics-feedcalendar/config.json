@@ -8,8 +8,8 @@
   "variant": "calendar",
   "categories": ["calendar"],
   "publisher": "MeetSynq",
-  "email": "help@cal.com",
-  "description": "Import events from an ICS Feed into [MeetSynq](https://cal.com).",
+  "email": "support@cuantolabs.com",
+  "description": "Import events from an ICS Feed into MeetSynq.",
   "isTemplate": false,
   "__createdUsingCli": true
 }

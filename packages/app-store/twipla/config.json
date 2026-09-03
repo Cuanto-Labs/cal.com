@@ -3,11 +3,11 @@
   "slug": "twipla",
   "type": "twipla_analytics",
   "logo": "icon.svg",
-  "url": "https://cal.com/",
+  "url": "https://meet.cuantolabs.com/",
   "variant": "analytics",
   "categories": ["analytics"],
   "publisher": "MeetSynq",
-  "email": "help@cal.com",
+  "email": "support@cuantolabs.com",
   "description": "Twipla.com, formerly known as Visitor Analytics, is a website intelligence platform that helps you understand how visitors interact with your website.",
   "extendsFeature": "EventType",
   "appData": {

@@ -13,9 +13,9 @@ export const metadata = {
   slug: "wipe-my-cal",
   title: "Wipe my cal",
   type: "wipemycal_other",
-  url: "https://cal.com/apps/wipe-my-cal",
+  url: "https://meet.cuantolabs.com",
   variant: "other",
-  email: "help@cal.com",
+  email: "support@cuantolabs.com",
   dirName: "wipemycalother",
   isOAuth: false,
 } as AppMeta;

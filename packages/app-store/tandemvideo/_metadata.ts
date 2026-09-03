@@ -14,7 +14,7 @@ export const metadata = {
   publisher: "",
   url: "",
   isGlobal: false,
-  email: "help@cal.com",
+  email: "support@cuantolabs.com",
   appData: {
     location: {
       linkType: "dynamic",
