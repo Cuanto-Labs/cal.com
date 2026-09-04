@@ -136,7 +136,11 @@ export const IS_TEAM_BILLING_ENABLED_CLIENT =
 
 export const FULL_NAME_LENGTH_MAX_LIMIT = 50;
 export const API_NAME_LENGTH_MAX_LIMIT = 80;
-export const MINUTES_TO_BOOK = process.env.NEXT_PUBLIC_MINUTES_TO_BOOK || "5";
+// A booker who leaves the form open keeps renewing this hold, so the value only
+// controls how long an ABANDONED tab keeps a slot hidden from everyone else.
+// Kept short because this instance publishes 2-3 slots a day — a stale 5-minute
+// hold on one of them reads as "fully booked".
+export const MINUTES_TO_BOOK = process.env.NEXT_PUBLIC_MINUTES_TO_BOOK || "2";
 export const ENABLE_PROFILE_SWITCHER = process.env.NEXT_PUBLIC_ENABLE_PROFILE_SWITCHER === "1";
 // Needed for orgs
 export const ALLOWED_HOSTNAMES = JSON.parse(`[${process.env.ALLOWED_HOSTNAMES || ""}]`) as string[];
