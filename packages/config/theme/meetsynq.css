@@ -1,0 +1,161 @@
+/*
+  MeetSynq brand layer.
+  Loaded AFTER tokens.css (and, in the web app, after coss-ui globals) so every
+  brand decision lives here instead of in upstream files. Keep upstream merges
+  clean: never edit tokens.css for branding, add overrides below.
+
+  Palette: ink #0A0A0A · orange #FF6B35 · teal #2DD4BF · fog #F4F5F5
+*/
+
+:root,
+:host {
+  --ms-ink: #0a0a0a;
+  --ms-orange: #ff6b35;
+  --ms-teal: #2dd4bf;
+
+  /* Radii: a step rounder than upstream */
+  --radius: 0.625rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  /* Neutrals: cool and near-achromatic instead of upstream's blue-gray */
+  --cal-bg: hsla(0, 0%, 100%, 1);
+  --cal-bg-subtle: hsla(200, 8%, 96%, 1);
+  --cal-bg-muted: hsla(200, 10%, 98%, 1);
+  --cal-bg-emphasis: hsla(200, 7%, 91%, 1);
+  --cal-bg-inverted: hsla(0, 0%, 4%, 1);
+
+  --cal-bg-primary: hsla(0, 0%, 4%, 1);
+  --cal-bg-primary-emphasis: hsla(240, 4%, 16%, 1);
+  --cal-bg-primary-muted: hsla(200, 8%, 96%, 1);
+
+  --cal-bg-brand: hsla(0, 0%, 4%, 1);
+  --cal-bg-brand-emphasis: hsla(240, 4%, 16%, 1);
+  --cal-bg-brand-muted: hsla(200, 8%, 96%, 1);
+
+  --cal-border-emphasis: hsla(210, 6%, 62%, 1);
+  --cal-border: hsla(200, 7%, 86%, 1);
+  --cal-border-subtle: hsla(200, 7%, 91%, 1);
+  --cal-border-muted: hsla(200, 8%, 95%, 1);
+
+  --cal-text-emphasis: hsla(0, 0%, 4%, 1);
+  --cal-text: hsla(240, 4%, 22%, 1);
+  --cal-text-subtle: hsla(216, 6%, 40%, 1);
+  --cal-text-muted: hsla(214, 7%, 60%, 1);
+
+  /* Success reads teal, attention reads orange: the two halves of the mark */
+  --cal-bg-semantic-success-subtle: hsla(172, 60%, 94%, 1);
+  --cal-bg-semantic-success-emphasis: hsla(172, 66%, 38%, 1);
+  --cal-text-semantic-success: hsla(172, 70%, 22%, 1);
+  --cal-bg-success: hsla(172, 60%, 94%, 1);
+  --cal-text-success: hsla(172, 60%, 22%, 1);
+
+  --cal-bg-semantic-attention-subtle: hsla(16, 100%, 94%, 1);
+  --cal-bg-semantic-attention-emphasis: hsla(16, 90%, 46%, 1);
+  --cal-text-semantic-attention: hsla(16, 80%, 32%, 1);
+  --cal-border-semantic-attention-subtle: hsla(16, 100%, 84%, 1);
+  --cal-bg-attention: hsla(16, 100%, 94%, 1);
+  --cal-text-attention: hsla(16, 70%, 30%, 1);
+
+  --cal-bg-visualization-4-subtle: hsla(172, 60%, 92%, 1);
+  --cal-bg-visualization-4-emphasis: hsla(172, 66%, 45%, 1);
+  --cal-bg-visualization-6-subtle: hsla(16, 100%, 92%, 1);
+  --cal-bg-visualization-6-emphasis: hsla(16, 100%, 60%, 1);
+
+  /* Brand: selected slots, primary buttons, booker accents (users/teams can still override) */
+  --cal-brand: hsla(0, 0%, 4%, 1);
+  --cal-brand-emphasis: hsla(240, 4%, 16%, 1);
+  --cal-brand-text: hsla(0, 0%, 100%, 1);
+  --cal-brand-subtle: hsla(214, 7%, 60%, 1);
+  --cal-brand-accent: hsla(0, 0%, 100%, 1);
+
+  /* coss-ui primitives */
+  --primary: hsla(0, 0%, 4%, 1);
+  --primary-foreground: hsla(0, 0%, 100%, 1);
+  --ring: var(--ms-orange);
+  --sidebar: hsla(200, 8%, 96%, 1);
+  --sidebar-primary: hsla(0, 0%, 4%, 1);
+  --sidebar-primary-foreground: hsla(0, 0%, 100%, 1);
+  --sidebar-ring: var(--ms-orange);
+}
+
+.dark {
+  --cal-bg: hsla(0, 0%, 5%, 1);
+  --cal-bg-subtle: hsla(0, 0%, 11%, 1);
+  --cal-bg-muted: hsla(0, 0%, 8%, 1);
+  --cal-bg-emphasis: hsla(0, 0%, 19%, 1);
+  --cal-bg-inverted: hsla(0, 0%, 98%, 1);
+
+  --cal-bg-primary: hsla(0, 0%, 96%, 1);
+  --cal-bg-primary-emphasis: hsla(0, 0%, 80%, 1);
+  --cal-bg-primary-muted: hsla(0, 0%, 14%, 1);
+
+  --cal-bg-brand: hsla(0, 0%, 98%, 1);
+  --cal-bg-brand-emphasis: hsla(0, 0%, 86%, 1);
+  --cal-bg-brand-muted: hsla(0, 0%, 14%, 1);
+
+  --cal-border: hsla(0, 0%, 24%, 1);
+  --cal-border-muted: hsla(0, 0%, 10%, 1);
+  --cal-border-subtle: hsla(0, 0%, 15%, 1);
+  --cal-border-emphasis: hsla(0, 0%, 42%, 1);
+
+  --cal-text-emphasis: hsla(0, 0%, 98%, 1);
+  --cal-text: hsla(0, 0%, 84%, 1);
+  --cal-text-subtle: hsla(0, 0%, 64%, 1);
+  --cal-text-muted: hsla(0, 0%, 52%, 1);
+
+  --cal-bg-semantic-success-subtle: hsla(172, 50%, 11%, 1);
+  --cal-bg-semantic-success-emphasis: hsla(172, 66%, 50%, 1);
+  --cal-text-semantic-success: hsla(172, 60%, 62%, 1);
+  --cal-bg-success: hsla(172, 50%, 14%, 1);
+  --cal-text-success: hsla(172, 60%, 88%, 1);
+
+  --cal-bg-semantic-attention-subtle: hsla(16, 60%, 11%, 1);
+  --cal-bg-semantic-attention-emphasis: hsla(16, 100%, 60%, 1);
+  --cal-text-semantic-attention: hsla(16, 100%, 70%, 1);
+  --cal-border-semantic-attention-subtle: hsla(16, 70%, 24%, 1);
+  --cal-bg-attention: hsla(16, 60%, 16%, 1);
+  --cal-text-attention: hsla(16, 100%, 90%, 1);
+
+  --cal-bg-visualization-4-subtle: hsla(172, 60%, 20%, 1);
+  --cal-bg-visualization-4-emphasis: hsla(172, 66%, 50%, 1);
+  --cal-bg-visualization-6-subtle: hsla(16, 70%, 22%, 1);
+  --cal-bg-visualization-6-emphasis: hsla(16, 100%, 60%, 1);
+
+  --cal-brand: hsla(0, 0%, 100%, 1);
+  --cal-brand-emphasis: hsla(0, 0%, 84%, 1);
+  --cal-brand-text: hsla(0, 0%, 4%, 1);
+  --cal-brand-subtle: hsla(0, 0%, 52%, 1);
+  --cal-brand-accent: hsla(0, 0%, 4%, 1);
+
+  --primary: hsla(0, 0%, 98%, 1);
+  --primary-foreground: hsla(0, 0%, 4%, 1);
+  --ring: var(--ms-orange);
+  --sidebar: hsla(0, 0%, 8%, 1);
+  --sidebar-primary: hsla(0, 0%, 98%, 1);
+  --sidebar-primary-foreground: hsla(0, 0%, 4%, 1);
+  --sidebar-ring: var(--ms-orange);
+}
+
+/* Text selection carries the accent */
+::selection {
+  background: var(--ms-orange);
+  color: #fff;
+}
+
+::-moz-selection {
+  background: var(--ms-orange);
+  color: #fff;
+}
+
+/* Display face: Bricolage Grotesque via --font-cal. The old face was a single
+   600 weight, so pin the weight to keep heading rhythm across the app. */
+.font-cal {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 96;
+}

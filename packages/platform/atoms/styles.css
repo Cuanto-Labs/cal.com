@@ -1,3 +1,4 @@
 @import "tailwindcss";
 @import "../../config/theme/tokens.css";
+@import "../../config/theme/meetsynq.css";
 @import "./sources.css";

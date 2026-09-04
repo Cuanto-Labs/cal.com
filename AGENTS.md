@@ -242,3 +242,18 @@ For detailed information, see the `agents/` directory:
 - **[agents/rules/](agents/rules/)** - Modular engineering rules
 - **[agents/commands.md](agents/commands.md)** - Complete command reference
 - **[agents/knowledge-base.md](agents/knowledge-base.md)** - Domain knowledge and business rules
+
+## Brand layer (keep upstream merges clean)
+
+MeetSynq is a fork that tracks upstream. Every visual/brand decision lives in a short list of files; never restyle upstream components directly.
+
+| Surface | File |
+|---------|------|
+| Colors, radii, dark mode, selection, display-font weight | `packages/config/theme/meetsynq.css` (imported after `tokens.css` in `apps/web/styles/globals.css`, `packages/embeds/embed-core/src/styles.css`, `packages/platform/atoms/styles.css`) |
+| Fonts (`--font-cal` = Bricolage Grotesque, `--font-sans` = Inter) | `apps/web/app/layout.tsx` |
+| Brand names, URLs, default brand color, logo paths | `packages/lib/constants.ts` |
+| Marketing pages (`/`, `/pricing`, `/white-label`) | `apps/web/app/{page,pricing,white-label}` + `apps/web/modules/marketing/` |
+| Icons, OG image, email logo | `apps/web/public/` (`meetsynq-*.svg`, favicons, `og-image.png`, `emails/logo.png`) |
+| User-facing strings | `packages/i18n/locales/*/common.json` (brand nouns only; re-apply after upstream merges) |
+
+After `git merge upstream/main`: resolve conflicts only in the files above, re-run the locale brand substitutions, then `yarn type-check:ci --force`.
